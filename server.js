@@ -31,7 +31,7 @@ app.get('/index2.html', (req, res) => {
 
 // CRUD
 // Destinos
-const Destino = require("./models/destinoModel")
+const Destino = require("./model/destinoModel")
 app.get('/Destinos', async (req, res) => {
   let destinos = await Destino.find();
 
