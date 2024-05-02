@@ -1,0 +1,9 @@
+{
+    "port" : 3001,
+    "sql_server" : {
+        "host": "localhost",
+        "user": "root",
+        "password": "",
+        "database": "exemplo_react_bd"
+    }
+}

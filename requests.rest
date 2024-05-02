@@ -1,1 +1,10 @@
-GET http://localhost:3001/todos
+GET http://localhost:3001/Destinos
+
+###
+
+POST http://localhost:3001/Destinos/new
+Content-Type: application/json
+
+{
+    "nome": "Santana"
+}
