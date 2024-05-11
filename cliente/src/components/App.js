@@ -1,39 +1,102 @@
 import React from 'react'
-import Clientes from './Clientes'//tabela para mostrar clientes
-import AddClient from './AddClient'//Formulario de adição de clientes
-import Nav from './Nav'//Formulario de adição de clientes
-import Admin from './Admin'//Formulario de adição de clientes
-import ContactUs from './ContactUs'//Formulario de adição de clientes
-import LogOut from './LogOut'//Formulario de adição de clientes
-import Perfil from './Perfil'//Formulario de adição de clientes
-import ContactUsAdmin from './ContactUsAdmin'//Formulario de adição de clientes
-import ListaDestinos from './ListaDestinos'//Formulario de adição de clientes
-import InserirDestinos from './InserirDestinos'//Formulario de adição de clientes
-import GerirUtilizadores from './GerirUtilizadores'//Formulario de adição de clientes
-import config from '../config.json'//link do back end
-import {BrowserRouter as Router,    Routes, Route} from 'react-router-dom'
+import Css from '../css/style.css'
 
-const SERVER = config.server
+import Chart from "chart.js/auto";
+import { CategoryScale } from "chart.js";
+import Nav from './Nav' 
+import Admin from './Admin' 
+import ContactUs from './ContactUs' 
+import Perfil from './Perfil' 
+import ContactUsAdmin from './ContactUsAdmin' 
+import ListaDestinos from './ListaDestinos' 
+import InserirDestinos from './InserirDestinos' 
+import GerirUtilizadores from './GerirUtilizadores' 
+import Register from './Register' 
+import Login from './LogIn' 
+import Home from './Home'
+
+import {BrowserRouter as Router, Routes, Route, Navigate, Outlet} from 'react-router-dom'
+
+ 
+
+
+function getCookie(cname) {
+    const cookies = Object.fromEntries(
+      document.cookie.split(/; /).map(c => {
+        const [key, v] = c.split('=', 2);
+        return [key, decodeURIComponent(v)];
+      }),
+    );
+    return cookies[cname] || '';
+  }
+
+
 export default class App extends React.Component{
-    render(){
+        async componentDidMount(){
+            
+        }
+        async  criarGrafico(idDestino, idChart){
+            const ctx = document.getElementById(idChart);
+
+            const destinos = await fetch("http://localhost:3001/Destinos/"+idDestino)
+            let dataa = await destinos.json()
+            console.log(dataa)
+            new Chart(
+                document.getElementById('myChart'),
+                {
+                type: 'bar',
+                data: {
+                    labels: [
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5"
+                    ],
+                    datasets: [
+                    {
+                        label: 'Estrelas',
+                        data: [
+                            dataa.estrela1,
+                            dataa.estrela2,
+                            dataa.estrela3,
+                            dataa.estrela4,
+                            dataa.estrela5,
+                        ]
+                    }
+                    ]
+                }
+                 }
+            );
+        }
+    render(){   
         return (
             
             <div>
                 
                 <Router>
-                    <Nav/>
+                    
+                    <Nav />
                     <Routes>
+
+                        <Route path="LogIn"  element={<Login/>}/>
+                        <Route path="Register"  element={<Register/>}/>
+                        <Route element={<ProtectedRoute />}>
+
+                            
+                            <Route path="Admin"  element={<Admin/>}/>
+
+                            <Route path="Admin/ContactUsAdmin"  element={<ContactUsAdmin/>}/>
+                            <Route path="Admin/InserirDestinos" element={<InserirDestinos/>}/>
+                            <Route path="Admin/ListaDestinos" element={<ListaDestinos/>}/>
+                            <Route path="Admin/GerirUtilizadores" element={<GerirUtilizadores/>}/>
+
+                            <Route path="" element={<Home/>}></Route>
+                            <Route path="Perfil" element={<Perfil/>}/>
+                            <Route path="ContactUs"    element={<ContactUs/>}/>
+
+                        </Route>
                         
-                        <Route path="Admin"  element={<Admin/>}/>
-
-                        <Route path="Admin/ContactUsAdmin" element={<ContactUsAdmin/>}/>
-                        <Route path="Admin/InserirDestinos" element={<InserirDestinos/>}/>
-                        <Route path="Admin/ListaDestinos" element={<ListaDestinos/>}/>
-                        <Route path="Admin/GerirUtilizadores" element={<GerirUtilizadores/>}/>
-
-                        <Route path="Perfil" element={<Perfil/>}/>
-                        <Route path="ContactUs" element={<ContactUs/>}/>
-                        <Route path="LogOut" element={<LogOut/>}/>
                        
                     </Routes>
                    
@@ -43,4 +106,16 @@ export default class App extends React.Component{
             </div>
         )
     }
+    
 }
+
+const ProtectedRoute = ({
+    redirectPath = '/LogIn',
+  }) => {
+    let auth = getCookie('Auth')
+    if(auth != "true")
+        return <Navigate to={redirectPath} replace />;
+    
+  
+    return <Outlet />;
+  };

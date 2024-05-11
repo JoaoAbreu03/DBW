@@ -12,7 +12,23 @@ const cors = require('cors')
 
 app.use(cors())
 app.use(express.json()) //poder capturar body nas requisicoes post, update e delete
+const multer = require('multer');
 const path = require('path');
+
+
+// Configura o multer para armazenar arquivos na pasta 'cliente/public'
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, '../cliente/public/images');
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}_${file.originalname}`);
+  }
+});
+
+
+const upload = multer({ storage });
+
 
 // Connectar à base de dados
 //mongoose.connect("mongodb+srv://joaoabreu221:joaoabreu@dbw.toqlem4.mongodb.net/").then( () => console.log("DB Connectada")).catch(console.error);
@@ -42,11 +58,21 @@ app.get('/Destinos', async (req, res) => {
   res.json(destinos);
 
 });
+app.get('/Destinos/:id', async (req, res) => {
+  let destinos = await Destino.findById(req.params.id);
 
-app.post('/Destinos/new', (req, res) => {
 
-  let destinos = new Destino ({nome: req.body.nome })
+  res.json(destinos);
+});
+
+
+app.post('/Destinos/new', upload.single('file'), (req, res) => {
+  console.log(req.file.destination+"/"+req.file.filename)
+  let destinos = new Destino ({titulo: req.body.titulo, descricao: req.body.descricao,estrela1: 5, estrela2:8, estrela3:20, estrela4:10, estrela5:2 })
+  
+  destinos.path = req.file.destination+"/"+req.file.filename
   destinos.save();
+
   
   res.json(destinos);
 });
@@ -74,24 +100,62 @@ app.delete('/deleteDestinos/:id', async (req, res) => {
 // CRUD
 // user
 const User = require("./model/userModel")
-app.get('/users', async (req, res) => {
+app.get('/user', async (req, res) => {
   let users = await User.find();
 
   res.json(users);
 });
 
-app.post('/users/new', (req, res) => {
 
-  let users = new UserDB ({nome: req.body.nome })
+// Rota para o upload da imagem
+// app.post('/upload', upload.single('file'), (req, res) => {
+//   console.log(req.body)
+//   console.log(req.file)
+//   res.send('Arquivo enviado com sucesso!');
+// });
+
+
+app.post('/users/new', upload.single('file'), (req, res) => {
+  let users = new User ({email: req.body.email, password: req.body.password })
+
+  if(!req.file)
+    users.path = "../cliente/src/assets/imagens/user.png"
+  else
+    users.path = req.file.destination+"/"+req.file.filename
+
+  console.log(req.body)
   users.save();
   
   res.json(users);
 });
 
-app.post('/updateuser/:id', async (req, res) => {//atualizar utilizador
-  const body = req.body//json com dados para inserir na base de dados
+
+app.put('/updateUsers/:id', async (req, res) => {//atualizar utilizador
+  const body = req.body   //json com dados para inserir na base de dados
+  const dest = await Destino.findById( req.params.id  );
   
-})
+  dest = new Destino ({nome: req.body.nome }) ;
+
+  dest.save();
+
+  res.json(dest);  
+
+});
+
+
+app.post('/userLogIn', async (req, res) => {
+  let users = await User.findOne({
+    email: req.body.email,
+    password: req.body.password
+  })
+
+  console.log(users);
+  if(!users)
+    return res.status(404).send({ message: "User Not found." });
+
+  else
+    res.json(users) 
+});
 
 app.delete('/deleteusers/:id', async (req, res) => {
   const result = await User.findByIdAndDelete( req.params.id  );

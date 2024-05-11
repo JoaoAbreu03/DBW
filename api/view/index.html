@@ -9,10 +9,21 @@
       <link rel="stylesheet" href="..\assets\estilos.css">
       </head>
       <style>
+        body{
+          font-family: Georgia, 'Times New Roman', Times, serif;
+          background-color: rgba(210, 210, 210, 0.585);
+        }   
+        .paragrafo{
+            text-align: justify;
+            margin-bottom: 0;
+        }
         .heading2{
           text-align: center;
           padding-top: 25px;
           padding-bottom: 25px;
+        }
+        .img2{
+            border-radius: 5px;
         }
       </style>
 
@@ -39,24 +50,24 @@
                     <a class="dropdown-item" href="#">Contact US</a>
                     <a class="dropdown-item" href="#">Admin</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="login.html">LogIn</a>
+                    <a class="dropdown-item" href="">LogIn</a>
                   </div>
               </div>
             </div>
             
           </nav>
           <div class="container">
-            <h2 class="heading2">Destinos pela madeira</h2>
+            <h1 class="heading2">Destinos pela madeira</h2>
             <div id="carouselExampleFade" class="carousel slide carousel-fade mt-1" data-ride="carousel">
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img class="d-block w-100 rounded" height="400rem" src="./assets/imagens/img2.jpg" alt="First slide"/>
+                  <img class="d-block w-100 rounded" height="400rem" src="../../assets/imagens/img2.jpg" alt="First slide"/>
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block w-100 rounded" height="400rem" src="./assets/imagens/img4.jpg" alt="Second slide" />
+                  <img class="d-block w-100 rounded" height="400rem" src="../../assets/imagens/img4.jpg" alt="Second slide" />
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block w-100 rounded" height="400rem"  src="./assets/imagens/img1.jpg" alt="Third slide"/>
+                  <img class="d-block w-100 rounded" height="400rem"  src="../../assets/imagens/img1.jpg" alt="Third slide"/>
                 </div>
               </div>
               <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
@@ -68,7 +79,7 @@
                 <span class="sr-only">Next</span>
               </a>
             </div>
-
+            <!--
             <div class="mt-2">
               <div>
                 <span class=" h3">titulo</span>
@@ -124,13 +135,28 @@
             </div>
 
           </div>
-          <!-- <div class="carousel-item">
+          <div class="carousel-item">
             <img src="..." alt="...">
             <div class="carousel-caption d-none d-md-block">
               <h5>...</h5>
               <p>...</p>
             </div>
           </div> -->
+          <div class="mt-3">
+            <h2>Destinos</h2>
+            <div class="row mb-5">
+              <div class="col-3">
+                  <img class="img2" src="../../assets/imagens/camara_lobos.jpg" width="275px" alt="">
+              </div>
+              <div class="col-9">
+                  <div class="ml-1">
+                      <h5>Câmara de Lobos</h5>
+                      <p class="paragrafo">Câmara de Lobos, na Ilha da Madeira, encanta com suas encostas íngremes e baía pitoresca. Reconhecida pela produção de vinho Madeira, a cidade também oferece trilhas para caminhadas, explorando sua beleza natural. Com uma rica história e vistas deslumbrantes, é um destino turístico cativante em Portugal.</p>
+                      <a href="">Ver Detalhes</a>
+                    </div>
+              </div>
+            </div>
+          </div>
     </body>
 
 </html>

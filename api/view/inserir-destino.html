@@ -13,29 +13,18 @@
 body{
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
-.cards{
-    width: 350px;
-    height: 250px;
-    font-size: 27px;
-    text-align: center;
-    padding-top: 97px;
+.img2{
+    border-radius: 5px;
 }
-.marg{
-    margin-left: 162px;
+.paragrafo{
+    text-align: justify;
 }
-.heading{
-    font-size: 40px;
+.back{
+    background-color: #d1eaff;
+    padding: 13px;
+    border-radius: 5px;
 }
-.form{
-    margin-top: 50px;
-    padding: 25px;
-    border-radius: 15px;
-    border: 1px groove rgb(110, 110, 110);;
-}
-.salvar{
-    width: 100%;
-    height: 50px;
-}
+
 </style>    
 <body>
     <nav class="navbar navbar-expand-lg navbar-light rounded" style="background-color: #52E0FF; -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0;">
@@ -67,24 +56,47 @@ body{
       </nav>
     
     <div class="container">
-        <h5 align="center" class="mt-5 heading">Inserir Destinos</h5>
+        <h1 align="center" class="mt-5">Lista de Destinos</h1>
+        <div class="row mt-5 back mb-5">
+            <div class="col-3">
+                <img class="img2" src="../../assets/imagens/camara_lobos.jpg" width="275px" alt="">
+            </div>
+            <div class="col-9">
+                <div class="ml-1">
+                    <h5>Câmara de Lobos</h5>
+                    <p class="paragrafo">Câmara de Lobos, na Ilha da Madeira, encanta com suas encostas íngremes e baía pitoresca. Reconhecida pela produção de vinho Madeira, a cidade também oferece trilhas para caminhadas, explorando sua beleza natural. Com uma rica história e vistas deslumbrantes, é um destino turístico cativante em Portugal.</p>
+                    <a href="" class="ml-1"><img src="../../assets/imagens/edit.png" height="15px" alt=""></a>
+                    <a href="" class="ml-1"><img src="../../assets/imagens/delete.png" height="15px" alt=""></a>
+                </div>
+            </div>
 
-        <form class="form" action="">
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Título</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1">
-              </div>
-              <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Descrição do Destino</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
-              </div> 
-              <div class="mb-3">
-                <input type="file" id="file" name="file" multiple />
-              </div>    
-              <div class="mb-3">
-                <input type="submit" class="salvar" value="Salvar">
-              </div>
-        </form>
+
+            <div class="col-3 mt-2">
+                <img class="img2" src="../../assets/imagens/camara_lobos.jpg" width="275px" alt="">
+            </div>
+            <div class="col-9 mt-2">
+                <div class="ml-1">
+                    <h5>Câmara de Lobos</h5>
+                    <p class="paragrafo">Câmara de Lobos, na Ilha da Madeira, encanta com suas encostas íngremes e baía pitoresca. Reconhecida pela produção de vinho Madeira, a cidade também oferece trilhas para caminhadas, explorando sua beleza natural. Com uma rica história e vistas deslumbrantes, é um destino turístico cativante em Portugal.</p>
+                    <a href="" class="ml-1"><img src="../../assets/imagens/edit.png" height="15px" alt=""></a>
+                    <a href="" class="ml-1"><img src="../../assets/imagens/delete.png" height="15px" alt=""></a>
+                </div> 
+            </div>
+
+            
+            <div class="col-3 mt-2">
+                <img class="img2" src="../../assets/imagens/camara_lobos.jpg" width="275px" alt="">
+            </div>
+            <div class="col-9 mt-2">
+                <div class="ml-1">
+
+                    <h5>Câmara de Lobos</h5>
+                    <p class="paragrafo">Câmara de Lobos, na Ilha da Madeira, encanta com suas encostas íngremes e baía pitoresca. Reconhecida pela produção de vinho Madeira, a cidade também oferece trilhas para caminhadas, explorando sua beleza natural. Com uma rica história e vistas deslumbrantes, é um destino turístico cativante em Portugal.</p>
+                    <a href="" class="ml-1"><img src="../../assets/imagens/edit.png" height="15px" alt=""></a>
+                    <a href="" class="ml-1"><img src="../../assets/imagens/delete.png" height="15px" alt=""></a>
+                </div>
+            </div>
+        </div>
 
     </div>
 </body>

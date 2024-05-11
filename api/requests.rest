@@ -1,4 +1,4 @@
-GET http://localhost:3001/Destinos
+GET http://localhost:3001/Destinos/663fec1c1e618a8ef89161fd
 
 ###
 
@@ -7,4 +7,27 @@ Content-Type: application/json
 
 {
     "nome": "Santana"
+}
+
+###
+
+POST http://localhost:3001/userLogIn
+Content-Type: application/json
+
+{
+    "email": "Santana",
+    "password": "Santana"
+
+}
+
+###
+
+GET http://localhost:3001/download/imagem_teste.jpg
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "imagem_teste",
+  "description": "Este é um exemplo de objeto JSON para testar o servidor com uma imagem.",
+  "image_url": "/download/imagem_teste.jpg"
 }

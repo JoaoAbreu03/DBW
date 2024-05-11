@@ -14,6 +14,7 @@ export default class App extends React.Component{
             flash_message : '',
             edit : false
         }
+        
     }
 
     async componentDidMount(){

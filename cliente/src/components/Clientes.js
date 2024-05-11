@@ -1,5 +1,5 @@
 import React from 'react'
-import Css from '../css/style.css'
+
 export  class Clientes extends React.Component{
     /* Tabela com listagem de clientes */
     render(){

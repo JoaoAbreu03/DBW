@@ -1,12 +1,29 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-export  default class Nav extends React.Component{
+import {corta} from './corta'
+const images = require.context('../../public/images', true);
 
+function getCookie(cname) {
+    const cookies = Object.fromEntries(
+        document.cookie.split(/; /).map(c => {
+        const [key, v] = c.split('=', 2);
+        return [key, decodeURIComponent(v)];
+        }),
+    );
+    return cookies[cname] || '';
+}
+
+
+
+export  default class Nav extends React.Component{
     
+    Sair() {
+        document.cookie = "Auth = false; expires = " + new Date(Date.now()+1000*60*20).toUTCString;
+    }
 
     render(){
         return (
-            <div>
+            <div id="nav">
                 <nav class="navbar navbar-expand-lg navbar-light rounded nbar">
                     <Link to="./">
                         <a class="nav-link" href="#" >
@@ -22,8 +39,8 @@ export  default class Nav extends React.Component{
                     </ul>
                     <div class="form-inline my-1 my-sm-0">
                         <div class="nav-item dropdown ">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="../assets/imagens/perfil_teste.png" alt="imagem perfil" width="50" height="50"/>
+                            <a class="nav-link dropdown-toggle" href="Perfil" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src={images(`./${corta(getCookie("path"))}`)} class="" width="50" height="50"/>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                <ul>
@@ -37,9 +54,8 @@ export  default class Nav extends React.Component{
                                     <a  class="dropdown-item" > Admin </a>
                                 </Link>
                                 <div class="dropdown-divider"></div>
-
-                                <Link to="/LogOut">
-                                    <a  class="dropdown-item" > LogOut </a>
+                                <Link to="/LogIn">
+                                    <button  class="dropdown-item" onClick={this.Sair}> LogOut </button>
                                 </Link>
                                
                                 </ul>
