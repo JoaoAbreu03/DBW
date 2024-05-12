@@ -61,8 +61,8 @@ export  default  class ListaDestinos extends React.Component{
                                     <button class="button-delete btn  btn-primary m-1" onClick={this.delete.bind(this,item._id)} >Delete</button> 
                                 </Link>
 
-                                <Link >
-                                    <button class="button btn  btn-primary" >Update</button>                        
+                                <Link to="/Admin/updateDestino" state={{ item }}>
+                                    <a class="button btn  btn-primary"  href="">Update</a>                        
                                 </Link>
                             </div>
 

@@ -1,6 +1,8 @@
 function corta(path){
-    
-    path = path.replace("../cliente/public/images/",'').replace(" ",'')
+    if(path != undefined && path != "" )
+        path = path.replace("../cliente/public/images/",'').replace(" ",'')
+    else
+        path = "imgg.png"
     return path
 }
 export {corta}

@@ -1,19 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {corta} from './corta'
+import { getCookie } from './getCookie';
 const images = require.context('../../public/images', true);
-
-function getCookie(cname) {
-    const cookies = Object.fromEntries(
-        document.cookie.split(/; /).map(c => {
-        const [key, v] = c.split('=', 2);
-        return [key, decodeURIComponent(v)];
-        }),
-    );
-    return cookies[cname] || '';
-}
-
-
 
 export  default class Nav extends React.Component{
     

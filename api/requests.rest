@@ -1,12 +1,13 @@
-GET http://localhost:3001/Destinos/663fec1c1e618a8ef89161fd
+GET http://localhost:3001/user/663fc17e8a9d5fe8d1c0f84a
 
 ###
 
-POST http://localhost:3001/Destinos/new
+POST http://localhost:3001/contactUs/new
 Content-Type: application/json
 
 {
-    "nome": "Santana"
+    "user": "teste",
+    "mensagem": "teste"
 }
 
 ###

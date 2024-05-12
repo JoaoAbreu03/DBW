@@ -5,15 +5,13 @@ const Schema = mongoose.Schema;
 
 const contactSchema = new Schema(
   {
-    User:
+    user:
     {
       type: String,
-      required: true
     },
-    Mensagem:
+    mensagem:
     {
       type: String,
-      required: true
     }
   });
 

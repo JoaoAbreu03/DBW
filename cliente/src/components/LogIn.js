@@ -36,8 +36,9 @@ export default class LogIn extends React.Component{
         
         if(res.ok){
             let path = await res.json()
-            document.cookie = "Auth = true; expires = " + new Date(Date.now()+1000*60*20).toUTCString;
-            document.cookie = "path = "+path.path+"; expires = " + new Date(Date.now()+1000*60*20).toUTCString;
+            document.cookie = "Auth = true; expires = " + new Date(Date.now()+1000*60*20).toUTCString();
+            document.cookie = "path = "+path.path+"; expires = " + new Date(Date.now()+1000*60*20).toUTCString();
+            document.cookie = "id = "+path._id+"; expires = " + new Date(Date.now()+1000*60*20).toUTCString();
             window.location.replace("http://localhost:3000/");
             return
         }

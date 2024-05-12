@@ -77,16 +77,23 @@ app.post('/Destinos/new', upload.single('file'), (req, res) => {
   res.json(destinos);
 });
 
-app.put('/updateDestino/:id', async (req, res) => {//atualizar utilizador
-  const body = req.body   //json com dados para inserir na base de dados
-  const dest = await Destino.findById( req.params.id  );
+app.post('/updateDestino/:id',upload.single('file'), async (req, res) => {
+  console.log(req.body)
+  console.log(req.params.id)
+
+  let dest = await Destino.findById( req.params.id  );
   
-  dest = new Destino ({nome: req.body.nome }) ;
+  dest.titulo = req.body.titulo
+  dest.descricao = req.body.descricao , 
+  dest.path = req.body.path
+
+  if(req.file){
+    dest.path = req.file.destination+"/"+req.file.filename
+  }
 
   dest.save();
 
   res.json(dest);  
-
 });
 
 app.delete('/deleteDestinos/:id', async (req, res) => {
@@ -105,6 +112,12 @@ app.get('/user', async (req, res) => {
 
   res.json(users);
 });
+app.get('/user/:id', async (req, res) => {
+  let users = await User.findById(req.params.id);
+
+  res.json(users);
+});
+
 
 
 // Rota para o upload da imagem
@@ -119,7 +132,7 @@ app.post('/users/new', upload.single('file'), (req, res) => {
   let users = new User ({email: req.body.email, password: req.body.password })
 
   if(!req.file)
-    users.path = "../cliente/src/assets/imagens/user.png"
+    users.path = "../cliente/public/images/user.png"
   else
     users.path = req.file.destination+"/"+req.file.filename
 
@@ -130,15 +143,20 @@ app.post('/users/new', upload.single('file'), (req, res) => {
 });
 
 
-app.put('/updateUsers/:id', async (req, res) => {//atualizar utilizador
-  const body = req.body   //json com dados para inserir na base de dados
-  const dest = await Destino.findById( req.params.id  );
+app.post('/updateUsers/:id', upload.single('file'), async (req, res) => {//atualizar utilizador
   
-  dest = new Destino ({nome: req.body.nome }) ;
+  console.log(req.body)
+  console.log(req.params.id)
 
-  dest.save();
+  let user = await User.findById( req.params.id  );
+  
+  if(req.file){
+    console.log("teste2")
+    user.path = req.file.destination+"/"+req.file.filename
+  }
+  user.save();
 
-  res.json(dest);  
+  res.json(user);
 
 });
 
@@ -167,22 +185,23 @@ app.delete('/deleteusers/:id', async (req, res) => {
 // CRUD
 // Contact Us
 const contactUs = require("./model/contactusModel")
+
 app.get('/contactUs', async (req, res) => {
-  let contact = await contactUs.UserD();
+  let contact = await contactUs.find();
 
   res.json(contact);
 });
 
 app.post('/contactUs/new', (req, res) => {
-
-  let contact = new ContactUs ({nome: req.body.nome })
-  contact.save();
-  
-  res.json(contact);
-});
-
-app.post('/updatecontactUs/:id', async (req, res) => {//atualizar utilizador
-  const body = req.body//json com dados para inserir na base de dados
+  try{
+    console.log(req.body)
+    let contact = new contactUs ({user: req.body.user, mensagem: req.body.mensagem} ) 
+    contact.save();
+    
+    res.json(contact);
+  }catch{
+    res.status(404)
+  }
   
 });
 
